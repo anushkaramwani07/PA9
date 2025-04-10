@@ -9,16 +9,21 @@ class Piece
 {
 public:
 	//constructor
-	Piece(int newXpos, int newYpos) : xPos(newXpos), yPos(newYpos) {};
+	Piece(double newXPos, double newYPos) : xPos(newXPos), yPos(newYPos) {};
 
 	//destructor
 	~Piece();
 
-	void setXPos(int newXPos);
-	
+	//setters
+	void setXPos(double newXPos);
+	void setYPos(double newYPos);
+
+	//getters
+	double getXPos();
+	double getYPos();
 
 private:
-	int xPos;
-	int yPos;
+	double xPos;
+	double yPos;
 	//graphic
 };
