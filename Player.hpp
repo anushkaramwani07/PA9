@@ -5,14 +5,14 @@
 
 using std::string;
 
-class Piece
+class Player
 {
 public:
 	//constructor
-	Piece(double newXPos, double newYPos) : xPos(newXPos), yPos(newYPos) {};
+	Player(double newXPos, double newYPos) : xPos(newXPos), yPos(newYPos) {};
 
 	//destructor
-	~Piece();
+	~Player();
 
 	//setters
 	void setXPos(double newXPos);
