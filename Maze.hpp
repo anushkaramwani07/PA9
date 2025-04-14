@@ -27,6 +27,8 @@ public:
 
 	void gameMenu(sf::RenderWindow& window, sf::Font font);
 
+	bool checkSpot(Player p, int x, int y);
+
 	//setters
 	void setPath(int newPath);
 	void setBlacked(int newBlock);
@@ -38,5 +40,5 @@ public:
 private:
 	int mPaths;
 	int mBlocked;
-	int arrBoard[8][8];
+	int arrBoard[8][8]; // [row][col]
 };
