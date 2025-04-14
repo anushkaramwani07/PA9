@@ -43,6 +43,26 @@ void Maze::setMaze(sf::RenderWindow& window, sf::Font font, Player p)
         // make the block appear
         // you can create an array (maybe double) to keep track of wear on the grid is vlocked and if they have hit that spot yet
         // 1 means path, 0 is blocked and then -1 is blocked and have already tried it
+
+        for (int i = 0; i < 8;i++)
+        {
+            for (int j = 0; j < 8;j++)
+            {
+                if (arrBoard[i][j] == -1)
+                {
+                    pos.x = j * 100 + 0.5; // x position
+                    pos.y = i * 100 + 0.5; // y postition
+
+                    this->setSize(size);
+                    this->setFillColor(sf::Color(255, 133, 180)); // marks the spots that have been found by the player to not be a path
+                    this->setOutlineThickness(0.5);
+                    this->setOutlineColor(sf::Color::White);
+                    this->setPosition(pos);
+
+                    window.draw(*this);
+                }
+            }
+        }
     }
 
     sf::Text text(font);
@@ -131,6 +151,8 @@ bool Maze::checkSpot(Player p, int x, int y)
     if (arrBoard[y - 1][x - 1] == 0)
     {
         arrBoard[y - 1][x - 1] = -1;
+
+        ++mBlocked;
 
         return false;
     }
