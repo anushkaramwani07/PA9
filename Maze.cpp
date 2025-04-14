@@ -126,6 +126,22 @@ void Maze::gameMenu(sf::RenderWindow& window, sf::Font font)
     window.draw(text);
 }
 
+bool Maze::checkSpot(Player p, int x, int y)
+{
+    if (arrBoard[y - 1][x - 1] == 0)
+    {
+        arrBoard[y - 1][x - 1] = -1;
+
+        return false;
+    }
+    else if (arrBoard[y - 1][x - 1] == -1)
+    {
+        return false;
+    }
+
+    return true;
+}
+
 //setters
 void Maze::setPath(int newPath)
 {
