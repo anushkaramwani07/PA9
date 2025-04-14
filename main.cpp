@@ -3,11 +3,12 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode({ 800, 800 }), "Lets Play The Maze Game!");
-    Player main(20.f, Vector2f(30, 30), sf::Color(236, 255, 173));
+    Player main(20.f, Vector2f(30, 30));
     Maze board(Vector2f(0, 0), Vector2f(0, 0), sf::Color::White);
     sf::Font font("Game Bubble.ttf");
 
     int gameDiff = 0, moveX = 1, moveY = 1;
+    sf::Clock delay;
 
     // easy, medium, hard
     // we want "enimies" that they can't always see and when they jump into the spot they lose
@@ -17,7 +18,6 @@ int main()
  
     while (window.isOpen())
     {
-
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
@@ -48,9 +48,9 @@ int main()
         }
         else // change screen because game difficulty has been selected
         {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) && delay.getElapsedTime() > sf::seconds(0.25)) // adds a delay after each button press
+                // this makes it so the player doesn't mmove that fast
             {
-                //.move({ 0, 0.03 });
                 if (moveY < 8)
                 {
                     ++moveY;
@@ -63,7 +63,61 @@ int main()
                     {
                         --moveY;
                     }
-                    
+                    delay.restart();
+                }
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && delay.getElapsedTime() > sf::seconds(0.25))
+            {
+                if (moveY > 1)
+                {
+                    --moveY;
+
+                    if (board.checkSpot(main, moveX, moveY) == true)
+                    {
+                        main.setYPos(main.getYPos() - 100);
+                    }
+                    else
+                    {
+                        ++moveY;
+                    }
+                    delay.restart();
+                }
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && delay.getElapsedTime() > sf::seconds(0.25))
+            {
+                if (moveX > 1)
+                {
+                    --moveX;
+
+                    if (board.checkSpot(main, moveX, moveY) == true)
+                    {
+                        main.setXPos(main.getXPos() - 100);
+                    }
+                    else
+                    {
+                        ++moveX;
+                    }
+                    delay.restart();
+                }
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && delay.getElapsedTime() > sf::seconds(0.25))
+            {
+                if (moveX < 8)
+                {
+                    ++moveX;
+
+                    if (board.checkSpot(main, moveX, moveY) == true)
+                    {
+                        main.setXPos(main.getXPos() + 100);
+                    }
+                    else
+                    {
+                        --moveX;
+                    }
+                    delay.restart();
                 }
             }
 
