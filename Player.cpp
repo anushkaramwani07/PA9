@@ -5,7 +5,7 @@ void Player::setYPos(double newYPos)
 	yPos = newYPos;
 
 	Vector2f pos(this->getPosition());
-	pos.y = pos.y + 100;
+	pos.y = newYPos;
 	this->setPosition(pos);	
 }
 
