@@ -1,18 +1,23 @@
 #pragma once
 
-#include <string>
-#include <iostream>
+#include "Header.hpp"
 
-using std::string;
-
-class Player
+class Player : public sf::CircleShape
 {
 public:
 	//constructor
-	Player(double newXPos, double newYPos) : xPos(newXPos), yPos(newYPos) {};
+	Player(const float& rad, const Vector2f& pos) : CircleShape(rad)
+	{
+		mColor = sf::Color(236, 255, 173);
+		mSize = rad;
+		xPos = pos.x;
+		yPos = pos.y;
+		this->setFillColor(sf::Color(236, 255, 173));
+		this->setPosition(pos);
+	}
 
-	//destructor
-	~Player();
+	////destructor
+	//~Player();
 
 	//setters
 	void setXPos(double newXPos);
@@ -23,7 +28,8 @@ public:
 	double getYPos();
 
 private:
+	sf::Color mColor;
+	float mSize;
 	double xPos;
 	double yPos;
-	//graphic
 };
