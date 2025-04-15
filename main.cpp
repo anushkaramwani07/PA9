@@ -7,14 +7,11 @@ int main()
     Maze board(Vector2f(0, 0), Vector2f(0, 0), sf::Color::White);
     sf::Font font("Game Bubble.ttf");
 
-    int gameDiff = 0, moveX = 1, moveY = 1;
+    int gameDiff = 0, moveX = 1, moveY = 1, moves = 0; //keep tally on number of moves so we can say they got the best score
     sf::Clock delay;
 
-    // easy, medium, hard
     // we want "enimies" that they can't always see and when they jump into the spot they lose
     // they can't see they maze instead they are blindly going through it maybe with obsticles
-
-    //creating a font to use to display texts
  
     while (window.isOpen())
     {
@@ -25,6 +22,7 @@ int main()
         }
 
         window.clear();
+
         if (gameDiff == 0) //the game difficulty hasn't been selected
         {
             board.gameMenu(window, font);
@@ -32,22 +30,25 @@ int main()
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1)) // easy
             {
-                board.easyMaze(window);
+                board.easyMaze();
                 gameDiff = 1;
             }
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2)) // medium
             {
+                //board.mediumMaze();
                 gameDiff = 2;
             }
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3)) // hard
             {
+                //board.hardMaze();
                 gameDiff = 3;
             }
         }
         else // change screen because game difficulty has been selected
         {
+            // move down
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) && delay.getElapsedTime() > sf::seconds(0.25)) // adds a delay after each button press
                 // this makes it so the player doesn't mmove that fast
             {
@@ -66,7 +67,7 @@ int main()
                     delay.restart();
                 }
             }
-
+            // move up
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && delay.getElapsedTime() > sf::seconds(0.25))
             {
                 if (moveY > 1)
@@ -84,7 +85,7 @@ int main()
                     delay.restart();
                 }
             }
-
+            // move left
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && delay.getElapsedTime() > sf::seconds(0.25))
             {
                 if (moveX > 1)
@@ -102,7 +103,7 @@ int main()
                     delay.restart();
                 }
             }
-
+            // move right
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && delay.getElapsedTime() > sf::seconds(0.25))
             {
                 if (moveX < 8)
@@ -122,7 +123,9 @@ int main()
             }
 
             board.setMaze(window, font, main);
+            gameDiff = board.checkWin(window, font, moveX, moveY);
         }
+
         window.display();
     }
 }
