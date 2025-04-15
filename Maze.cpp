@@ -8,7 +8,6 @@ void Maze::setMaze(sf::RenderWindow& window, sf::Font font, Player p)
     sf::Texture texture("Brick.jpg", false, sf::IntRect({ 0, 0 }, { 800, 800 }));
     texture.setSmooth(true);
     sf::Sprite sprite(texture);
-    //sprite.setTextureRect(sf::IntRect({ 60, 60 }, { 860, 860 }));
     sprite.setColor(sf::Color(125, 66, 55, 128));
     window.draw(sprite);
     
@@ -54,7 +53,7 @@ void Maze::setMaze(sf::RenderWindow& window, sf::Font font, Player p)
                     pos.y = i * 100 + 0.5; // y postition
 
                     this->setSize(size);
-                    this->setFillColor(sf::Color(255, 133, 180)); // marks the spots that have been found by the player to not be a path
+                    this->setFillColor(sf::Color(255, 133, 180, 128)); // marks the spots that have been found by the player to not be a path
                     this->setOutlineThickness(0.5);
                     this->setOutlineColor(sf::Color::White);
                     this->setPosition(pos);
@@ -87,7 +86,7 @@ void Maze::setMaze(sf::RenderWindow& window, sf::Font font, Player p)
     window.draw(p);
 }
 
-void Maze::easyMaze(sf::RenderWindow& window)
+void Maze::easyMaze()
 {
     
     this->arrBoard[0][0] = 3; //start
@@ -104,6 +103,15 @@ void Maze::easyMaze(sf::RenderWindow& window)
     mPaths = 33;
 }
 
+void Maze::mediumMaze()
+{
+}
+
+void Maze::hardMaze()
+{
+}
+
+//displaying the game menu difficulty
 void Maze::gameMenu(sf::RenderWindow& window, sf::Font font)
 {
     sf::Text text(font);    
@@ -117,12 +125,14 @@ void Maze::gameMenu(sf::RenderWindow& window, sf::Font font)
     text.setPosition(sf::Vector2f{ 400,400 });
     text.setFillColor(sf::Color(242, 242, 145));
 
-    auto rectangle = sf::RectangleShape{ {600.f, 500.f} };
-    rectangle.setFillColor(sf::Color(146, 187, 252));
-    rectangle.setOrigin(rectangle.getGlobalBounds().size / 2.f);
-    rectangle.setPosition(text.getPosition());
+    auto rec = sf::RectangleShape{ {600.f, 500.f} };
+    rec.setFillColor(sf::Color(146, 187, 252));
+    rec.setOutlineThickness(10);
+    rec.setOutlineColor(sf::Color(160, 144, 252));
+    rec.setOrigin(rec.getGlobalBounds().size / 2.f);
+    rec.setPosition(text.getPosition());
 
-    window.draw(rectangle);
+    window.draw(rec);
     window.draw(text);
 
     // Easy
@@ -148,7 +158,7 @@ void Maze::gameMenu(sf::RenderWindow& window, sf::Font font)
 
 bool Maze::checkSpot(Player p, int x, int y)
 {
-    if (arrBoard[y - 1][x - 1] == 0)
+    if (arrBoard[y - 1][x - 1] == 0) // is blocked
     {
         arrBoard[y - 1][x - 1] = -1;
 
@@ -156,12 +166,33 @@ bool Maze::checkSpot(Player p, int x, int y)
 
         return false;
     }
-    else if (arrBoard[y - 1][x - 1] == -1)
+    else if (arrBoard[y - 1][x - 1] == -1) // already has been there
     {
         return false;
     }
 
     return true;
+}
+
+int Maze::checkWin(sf::RenderWindow& window, sf::Font font, int x, int y)
+{
+
+    if (arrBoard[y - 1][x - 1] == 2) //end
+    {
+        sf::Text text(font);
+
+        text.setString("You Win");
+        text.setCharacterSize(200);
+        auto center = text.getGlobalBounds().size / 2.f;
+        auto bounds = center + text.getLocalBounds().position;
+        text.setOrigin(bounds);
+        text.setPosition(sf::Vector2f{ 400,400 });
+        text.setFillColor(sf::Color(242, 242, 145));
+
+        window.draw(text);
+    }
+
+    return 4;
 }
 
 //setters
