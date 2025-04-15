@@ -15,6 +15,7 @@ public:
 				arrBoard[i][j] = 0;
 			}
 		}
+
 		mPaths = 0;
 		mBlocked = 0;
 		this->setFillColor(color);
@@ -23,11 +24,16 @@ public:
 
 	void setMaze(sf::RenderWindow& window, sf::Font font, Player p);
 
-	void easyMaze(sf::RenderWindow& window);
+	//difficulties
+	void easyMaze();
+	void mediumMaze();
+	void hardMaze();
 
 	void gameMenu(sf::RenderWindow& window, sf::Font font);
 
 	bool checkSpot(Player p, int x, int y);
+
+	int checkWin(sf::RenderWindow& window, sf::Font font, int x, int y);
 
 	//setters
 	void setPath(int newPath);
