@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Programmers: Abaigail Kubli and Anushka Ramwani
+ * Class: CptS 122; Lab Section 10
+ * Programming Assignment: 9 - A Graphical Game or Application
+ * Date: 4/12/2025
+ *
+ * Description: Creating our own game using sfml and inheritance
+ *
+ ******************************************************************************/
+
 #include "Maze.hpp"
 
 void Maze::setMaze(sf::RenderWindow& window, sf::Font font, Player p)
@@ -8,7 +18,7 @@ void Maze::setMaze(sf::RenderWindow& window, sf::Font font, Player p)
     sf::Texture texture("Brick.jpg", false, sf::IntRect({ 0, 0 }, { 800, 800 }));
     texture.setSmooth(true);
     sf::Sprite sprite(texture);
-    sprite.setColor(sf::Color(125, 66, 55, 128));
+    sprite.setColor(sf::Color(158, 76, 73, 128));
     window.draw(sprite);
     
 
@@ -20,7 +30,7 @@ void Maze::setMaze(sf::RenderWindow& window, sf::Font font, Player p)
 
         while (xPos < 8)
         {
-            pos.x = xPos * 100 + 0.5; // x position
+            pos.x = xPos * 100 + 0.5; // x position (0.5 buffer for the grid)
             pos.y = yPos * 100 + 0.5; // y postition
 
             this->setSize(size);
@@ -37,12 +47,8 @@ void Maze::setMaze(sf::RenderWindow& window, sf::Font font, Player p)
         ++yPos;
     }
 
-    if (this->getBlocked() > 0)
+    if (this->getBlocked() > 0) // the palyer has found a blocked path
     {
-        // make the block appear
-        // you can create an array (maybe double) to keep track of wear on the grid is vlocked and if they have hit that spot yet
-        // 1 means path, 0 is blocked and then -1 is blocked and have already tried it
-
         for (int i = 0; i < 8;i++)
         {
             for (int j = 0; j < 8;j++)
@@ -65,14 +71,28 @@ void Maze::setMaze(sf::RenderWindow& window, sf::Font font, Player p)
     }
 
     sf::Text text(font);
-
-    //displaying the start text on the screen
     text = sf::Text{ font, "Start" };
     text.setCharacterSize(25);
-    Vector2f position(text.getLocalBounds().position.x / 50, text.getLocalBounds().position.y / 50);
-    text.setOrigin(position);
-    text.setFillColor(sf::Color(43, 227, 98));
-    window.draw(text);
+    Vector2f position(-15, -0);
+
+    for (int i = 0; i < 8;i++)
+    {
+        for (int j = 0; j < 8;j++)
+        {
+            if (arrBoard[i][j] == 3)
+            {
+                position.x = position.x + j * -100; // x position
+                position.y = position.y + i * -100; // y postition
+
+                //displaying the start text on the screen                
+                text.setOrigin(position);
+                text.setFillColor(sf::Color(43, 227, 98));
+                window.draw(text);
+
+                window.draw(*this);
+            }
+        }
+    }
 
     //displaying the end text on the screen
     text.setString("End");
@@ -88,7 +108,6 @@ void Maze::setMaze(sf::RenderWindow& window, sf::Font font, Player p)
 
 void Maze::easyMaze()
 {
-    
     this->arrBoard[0][0] = 3; //start
     arrBoard[1][0] = arrBoard[2][0] = arrBoard[3][0] = arrBoard[4][0] = arrBoard[5][0] = arrBoard[6][0] =
         arrBoard[2][1] = arrBoard[3][1] = arrBoard[6][1] =
@@ -97,18 +116,31 @@ void Maze::easyMaze()
         arrBoard[1][4] = arrBoard[2][4] = arrBoard[3][4] = arrBoard[4][4] = arrBoard[6][4] =
         arrBoard[2][5] = arrBoard[5][5] = arrBoard[6][5] = arrBoard[7][5] =
         arrBoard[2][6] = arrBoard[3][6] = arrBoard[4][6] = arrBoard[5][6] = arrBoard[7][6] =
-        arrBoard[1][7] = arrBoard[2][7] = arrBoard[5][7] = 1;
+        arrBoard[1][7] = arrBoard[2][7] = arrBoard[5][7] = 1; // paths
     arrBoard[7][7] = 2; // end
 
-    mPaths = 33;
+    mPaths = 33; // not includeing start and end
 }
 
 void Maze::mediumMaze()
 {
+    this->arrBoard[3][0] = 3; //start
+    arrBoard[5][0] =
+        arrBoard[1][1] = arrBoard[3][1] = arrBoard[5][1] = arrBoard[6][1] = arrBoard[7][1] =
+        arrBoard[1][2] = arrBoard[3][2] = arrBoard[4][2] = arrBoard[5][2] = arrBoard[7][2] =
+        arrBoard[0][3] = arrBoard[1][3] = arrBoard[2][3] = arrBoard[4][3] = arrBoard[6][3] = arrBoard[7][3] =
+        arrBoard[0][4] = arrBoard[2][4] = arrBoard[3][4] = arrBoard[4][4] = arrBoard[5][4] =
+        arrBoard[0][5] /*= arrBoard[5][5]*/ = arrBoard[7][5] = 
+        arrBoard[0][6] = arrBoard[1][6] = arrBoard[2][6] = arrBoard[3][6] = arrBoard[4][6] = arrBoard[5][6] = arrBoard[6][6] =
+        arrBoard[0][7] = arrBoard[2][7] = arrBoard[5][7] = arrBoard[6][7] = 1; // paths
+    arrBoard[7][7] = 2; // end
+
+    mPaths = 35;
 }
 
-void Maze::hardMaze()
+void Maze::hardMaze() // enimies
 {
+
 }
 
 //displaying the game menu difficulty
@@ -174,12 +206,13 @@ bool Maze::checkSpot(Player p, int x, int y)
     return true;
 }
 
-int Maze::checkWin(sf::RenderWindow& window, sf::Font font, int x, int y)
+int Maze::checkWin(sf::RenderWindow& window, sf::Font font, int x, int y, int gameDif)
 {
 
     if (arrBoard[y - 1][x - 1] == 2) //end
     {
-        sf::Text text(font);
+        return 10;
+        /*sf::Text text(font);
 
         text.setString("You Win");
         text.setCharacterSize(200);
@@ -189,10 +222,10 @@ int Maze::checkWin(sf::RenderWindow& window, sf::Font font, int x, int y)
         text.setPosition(sf::Vector2f{ 400,400 });
         text.setFillColor(sf::Color(242, 242, 145));
 
-        window.draw(text);
+        window.draw(text);*/
     }
 
-    return 4;
+    return gameDif;
 }
 
 //setters
