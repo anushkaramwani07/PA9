@@ -15,7 +15,13 @@ void Player::setYPos(double newYPos)
 
 	Vector2f pos(this->getPosition());
 	pos.y = newYPos;
-	this->setPosition(pos);	
+	this->setPosition(pos);
+}
+
+void Player::setmSprite(sf::RenderWindow& window)
+{
+	mSprite.setPosition(Vector2f(xPos, yPos));
+	window.draw(mSprite);
 }
 
 // getters
