@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Programmers: Abaigail Kubli and Anushka Ramwani
+ * Class: CptS 122; Lab Section 10
+ * Programming Assignment: 9 - A Graphical Game or Application
+ * Date: 4/12/2025
+ *
+ * Description: Creating our own game using sfml and inheritance
+ *
+ ******************************************************************************/
+
 #include "Player.hpp"
 
 //setters
@@ -15,12 +25,14 @@ void Player::setYPos(double newYPos)
 
 	Vector2f pos(this->getPosition());
 	pos.y = newYPos;
-	this->setPosition(pos);
+	this->setPosition(pos);	
 }
 
-void Player::setmSprite(sf::RenderWindow& window)
+void Player::setSprite(sf::RenderWindow& window, sf::Texture texture)
 {
-	mSprite.setPosition(Vector2f(xPos, yPos));
+	mSprite.setTexture(texture, false);
+	mSprite.setScale(Vector2f(0.125, 0.125));
+	mSprite.setPosition(Vector2f(xPos-15, yPos-15));
 	window.draw(mSprite);
 }
 
