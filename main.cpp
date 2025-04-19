@@ -3,7 +3,8 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode({ 800, 800 }), "Lets Play The Maze Game!");
-    Player main(20.f, Vector2f(30, 30));
+    sf::Texture mTexture("spider.png", false,sf::IntRect({ 0,0 }, {800,800}));
+    Player main(20.f, Vector2f(30, 30), mTexture, window);
     Maze board(Vector2f(0, 0), Vector2f(0, 0), sf::Color::White);
     sf::Font font("Game Bubble.ttf");
 
@@ -12,7 +13,7 @@ int main()
 
     // we want "enimies" that they can't always see and when they jump into the spot they lose
     // they can't see they maze instead they are blindly going through it maybe with obsticles
- 
+
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
