@@ -8,29 +8,36 @@
  *
  ******************************************************************************/
 
-#include "Test.hpp"
-
+#include "maze.hpp"
+#include "Enemy.hpp"
 int main()
 {
     // test cases ////////////////////////////////////////////////////////
-    Test t;
+   // Test t;
     //t.testMazeConstructor();
-    //t.testSetSprite();
-    //t.testCheckSpot();
     //////////////////////////////////////////////////////////////////////
 
-    sf::RenderWindow window(sf::VideoMode({800, 800}), "Lets Play The Maze Game!");
+    sf::RenderWindow window(sf::VideoMode({ 800, 800 }), "Lets Play The Maze Game!");
     sf::Texture mTexture("spider.png", false, sf::IntRect({ 0,0 }, { 638,532 }));
     sf::Sprite spider(mTexture);
+
+    sf::Texture enemyTexture;
+    Enemy enemy(20.f, Vector2f(30,30), enemyTexture);
+    enemyTexture.loadFromFile("enemy.png", false, sf::IntRect({ 0, 0 }, { 638,532 }));
+    enemy.setTexture(&enemyTexture);
+    window.draw(enemy);
+    //window.draw(enemy);
+
     sf::Font font("Game Bubble.ttf");
     Player main(20.f, Vector2f(30, 30), mTexture);
-    Maze board(Vector2f(0, 0), Vector2f(0, 0), sf::Color::Transparent);
+    Maze board(Vector2f(0, 0), Vector2f(0, 0), sf::Color::White);
 
     int gameDiff = 0, moveX = 1, moveY = 1, moves = 0; //keep tally on number of moves so we can say they got the best score
     sf::Clock delay;
-
+      
+    
     // we want "enimies" that they can't always see and when they jump into the spot they lose
- 
+
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -41,8 +48,7 @@ int main()
 
         window.clear();
 
-        //the game difficulty hasn't been selected
-        if (gameDiff == 0)
+        if (gameDiff == 0) //the game difficulty hasn't been selected
         {
             board.gameMenu(window, font);
 
@@ -68,8 +74,7 @@ int main()
                 gameDiff = 3;
             }
         }
-        // they won the game
-        else if (gameDiff == 10)
+        else if (gameDiff == 10) // they won the game
         {
             //displaying firework image
             sf::Texture texture("fireworks.jpg", false, sf::IntRect({ 0, 0 }, { 800, 800 }));
@@ -92,13 +97,12 @@ int main()
 
             window.draw(text);
         }
-        // they lost the game
-        else if (gameDiff == -1)
+        else if (gameDiff == -1) // they lost the game
         {
             sf::Text text(font);
 
             //displaying the losing text
-            text.setString("GAME OVER");
+            text.setString("YOU LOSE");
             text.setCharacterSize(200);
             auto center = text.getGlobalBounds().size / 2.f;
             auto bounds = center + text.getLocalBounds().position;
@@ -108,8 +112,7 @@ int main()
 
             window.draw(text);
         }
-        // change screen because game difficulty has been selected
-        else
+        else // change screen because game difficulty has been selected
         {
             // move down
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) && delay.getElapsedTime() > sf::seconds(0.25)) // adds a delay after each button press
@@ -122,7 +125,6 @@ int main()
                     if (board.checkSpot(main, moveX, moveY) == true)
                     {
                         main.setYPos(main.getYPos() + 100);
-                        main.rotateSprite(mTexture, "down");
                     }
                     else
                     {
@@ -141,7 +143,6 @@ int main()
                     if (board.checkSpot(main, moveX, moveY) == true)
                     {
                         main.setYPos(main.getYPos() - 100);
-                        main.rotateSprite(mTexture, "up");
                     }
                     else
                     {
@@ -160,7 +161,6 @@ int main()
                     if (board.checkSpot(main, moveX, moveY) == true)
                     {
                         main.setXPos(main.getXPos() - 100);
-                        main.rotateSprite(mTexture, "left");
                     }
                     else
                     {
@@ -179,7 +179,6 @@ int main()
                     if (board.checkSpot(main, moveX, moveY) == true)
                     {
                         main.setXPos(main.getXPos() + 100);
-                        main.rotateSprite(mTexture, "right");
                     }
                     else
                     {
@@ -192,7 +191,7 @@ int main()
             board.setMaze(window, font, main);
             main.setSprite(window, mTexture);
 
-            gameDiff = board.checkWin(window, font, moveX, moveY, gameDiff);
+            //gameDiff = board.checkWin(window, font, moveX, moveY, gameDiff);
         }
 
         window.display();
