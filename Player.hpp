@@ -27,38 +27,77 @@ public:
 	*************************************************************/
 	Player(const float& rad, const Vector2f& pos, sf::Texture texture) : mSprite(texture), CircleShape(rad)
 	{
-		mColor = sf::Color(236, 255, 173);
-		mSize = rad;
+		/*mColor = sf::Color::Transparent;
+		mSize = rad;*/
 		xPos = pos.x;
 		yPos = pos.y;
-		this->setFillColor(sf::Color(236, 255, 173));
+		this->setFillColor(sf::Color::Transparent);
 		this->setPosition(pos);
 		this->setPosition(pos);
 	}
 
-
+	//setters
 	/*************************************************************
-	* Function: Player()
-	* Date Created: 4/14/25
-	* Date Last Modified: 4/18/25
-	* Description: constructor for the Player
-	* Input parameters: const float& rad, const Vector2f& pos
+	* Function: setXPos()
+	* Date Created: 4/15/25
+	* Date Last Modified: 4/16/25
+	* Description: sets the x postion for player
+	* Input parameters: double newXPos
 	* Returns: nothing
 	* Preconditions: none
 	* Postconditions: none
 	*************************************************************/
-	//setters
 	void setXPos(double newXPos);
+	/*************************************************************
+	* Function: setYPos()
+	* Date Created: 4/15/25
+	* Date Last Modified: 4/16/25
+	* Description: sets the y postion for player
+	* Input parameters: double newYPos
+	* Returns: nothing
+	* Preconditions: none
+	* Postconditions: none
+	*************************************************************/
 	void setYPos(double newYPos);
+	/*************************************************************
+	* Function: setXPos()
+	* Date Created: 4/19/25
+	* Date Last Modified: 4/19/25
+	* Description: sets the sprites postion for player
+	* Input parameters: sf::RenderWindow& window, sf::Texture texture
+	* Returns: nothing
+	* Preconditions: none
+	* Postconditions: none
+	*************************************************************/
 	void setSprite(sf::RenderWindow& window, sf::Texture texture);
 
 	//getters
+	/*************************************************************
+	* Function: getXPos()
+	* Date Created: 4/15/25
+	* Date Last Modified: 4/15/25
+	* Description: gets the x postion for the player
+	* Input parameters: none
+	* Returns: xPos
+	* Preconditions: none
+	* Postconditions: none
+	*************************************************************/
 	double getXPos();
+	/*************************************************************
+	* Function: getYPos()
+	* Date Created: 4/15/25
+	* Date Last Modified: 4/15/25
+	* Description: gets the y postion for the player
+	* Input parameters: none
+	* Returns: yPos
+	* Preconditions: none
+	* Postconditions: none
+	*************************************************************/
 	double getYPos();
 
 private:
-	sf::Color mColor;
-	float mSize;
+	/*sf::Color mColor;
+	float mSize;*/
 	double xPos;
 	double yPos;
 	sf::Sprite mSprite;
