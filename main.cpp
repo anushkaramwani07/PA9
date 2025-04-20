@@ -122,6 +122,7 @@ int main()
                     if (board.checkSpot(main, moveX, moveY) == true)
                     {
                         main.setYPos(main.getYPos() + 100);
+                        main.rotateSprite(mTexture, "down");
                     }
                     else
                     {
@@ -140,6 +141,7 @@ int main()
                     if (board.checkSpot(main, moveX, moveY) == true)
                     {
                         main.setYPos(main.getYPos() - 100);
+                        main.rotateSprite(mTexture, "up");
                     }
                     else
                     {
@@ -158,6 +160,7 @@ int main()
                     if (board.checkSpot(main, moveX, moveY) == true)
                     {
                         main.setXPos(main.getXPos() - 100);
+                        main.rotateSprite(mTexture, "left");
                     }
                     else
                     {
@@ -176,6 +179,7 @@ int main()
                     if (board.checkSpot(main, moveX, moveY) == true)
                     {
                         main.setXPos(main.getXPos() + 100);
+                        main.rotateSprite(mTexture, "right");
                     }
                     else
                     {
