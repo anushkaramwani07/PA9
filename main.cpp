@@ -15,6 +15,8 @@ int main()
     // test cases ////////////////////////////////////////////////////////
     Test t;
     //t.testMazeConstructor();
+    //t.testSetSprite();
+    //t.testCheckSpot();
     //////////////////////////////////////////////////////////////////////
 
     sf::RenderWindow window(sf::VideoMode({800, 800}), "Lets Play The Maze Game!");
@@ -22,7 +24,7 @@ int main()
     sf::Sprite spider(mTexture);
     sf::Font font("Game Bubble.ttf");
     Player main(20.f, Vector2f(30, 30), mTexture);
-    Maze board(Vector2f(0, 0), Vector2f(0, 0), sf::Color::White);
+    Maze board(Vector2f(0, 0), Vector2f(0, 0), sf::Color::Transparent);
 
     int gameDiff = 0, moveX = 1, moveY = 1, moves = 0; //keep tally on number of moves so we can say they got the best score
     sf::Clock delay;
@@ -39,7 +41,8 @@ int main()
 
         window.clear();
 
-        if (gameDiff == 0) //the game difficulty hasn't been selected
+        //the game difficulty hasn't been selected
+        if (gameDiff == 0)
         {
             board.gameMenu(window, font);
 
@@ -65,7 +68,8 @@ int main()
                 gameDiff = 3;
             }
         }
-        else if (gameDiff == 10) // they won the game
+        // they won the game
+        else if (gameDiff == 10)
         {
             //displaying firework image
             sf::Texture texture("fireworks.jpg", false, sf::IntRect({ 0, 0 }, { 800, 800 }));
@@ -88,12 +92,13 @@ int main()
 
             window.draw(text);
         }
-        else if (gameDiff == -1) // they lost the game
+        // they lost the game
+        else if (gameDiff == -1)
         {
             sf::Text text(font);
 
             //displaying the losing text
-            text.setString("YOU LOSE");
+            text.setString("GAME OVER");
             text.setCharacterSize(200);
             auto center = text.getGlobalBounds().size / 2.f;
             auto bounds = center + text.getLocalBounds().position;
@@ -103,7 +108,8 @@ int main()
 
             window.draw(text);
         }
-        else // change screen because game difficulty has been selected
+        // change screen because game difficulty has been selected
+        else
         {
             // move down
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) && delay.getElapsedTime() > sf::seconds(0.25)) // adds a delay after each button press
