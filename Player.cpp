@@ -10,6 +10,36 @@
 
 #include "Player.hpp"
 
+ /*************************************************************
+* Function: rotateSprite()
+* Date Created: 4/20/25
+* Date Last Modified: 4/20/25
+* Description: rotates the player in the direction they move
+* Input parameters: sf::Texture texture, string direction
+* Returns: nothing
+* Preconditions: none
+* Postconditions: none
+*************************************************************/
+void Player::rotateSprite(sf::Texture texture, string direction)
+{
+	if (direction == "down")
+	{
+		mSprite.setRotation(sf::degrees(0));
+	}
+	else if(direction == "up")
+	{
+		mSprite.setRotation(sf::degrees(180));
+	}
+	else if (direction == "right")
+	{
+		mSprite.setRotation(sf::degrees(270));
+	}
+	else if (direction == "left")
+	{
+		mSprite.setRotation(sf::degrees(90));
+	}
+}
+
 //setters
 /*************************************************************
 * Function: setXPos()
@@ -61,7 +91,8 @@ void Player::setSprite(sf::RenderWindow& window, sf::Texture texture)
 {
 	mSprite.setTexture(texture, false);
 	mSprite.setScale(Vector2f(0.125, 0.125));
-	mSprite.setPosition(Vector2f(xPos - 15, yPos - 15));
+	mSprite.setOrigin(Vector2f(319, 266));
+	mSprite.setPosition(Vector2f(xPos + 15, yPos + 15));
 	window.draw(mSprite);
 }
 
