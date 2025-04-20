@@ -36,6 +36,18 @@ public:
 		this->setPosition(pos);
 	}
 
+	/*************************************************************
+	* Function: rotateSprite()
+	* Date Created: 4/20/25
+	* Date Last Modified: 4/20/25
+	* Description: rotates the player in the direction they move
+	* Input parameters: sf::Texture texture, string direction
+	* Returns: nothing
+	* Preconditions: none
+	* Postconditions: none
+	*************************************************************/
+	void rotateSprite(sf::Texture texture, string direction);
+
 	//setters
 	/*************************************************************
 	* Function: setXPos()
