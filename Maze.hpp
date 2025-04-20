@@ -127,6 +127,18 @@ public:
 	*************************************************************/
 	int checkWin(sf::RenderWindow& window, sf::Font font, int x, int y, int gameDif);
 
+	/*************************************************************
+	* Function: printBoard()
+	* Date Created: 4/19/25
+	* Date Last Modified: 4/19/25
+	* Description: prints the arrBoard
+	* Input parameters: none
+	* Returns: mBlocked
+	* Preconditions: none
+	* Postconditions: none
+	*************************************************************/
+	void printBoard();
+
 	//setters
 	/*************************************************************
 	* Function: setPath()
@@ -174,17 +186,6 @@ public:
 	* Postconditions: none
 	*************************************************************/
 	int getBlocked();
-	/*************************************************************
-	* Function: printBoard()
-	* Date Created: 4/19/25
-	* Date Last Modified: 4/19/25
-	* Description: prints the arrBoard
-	* Input parameters: none
-	* Returns: mBlocked
-	* Preconditions: none
-	* Postconditions: none
-	*************************************************************/
-	void printBoard();
 
 private:
 	int mPaths; // the amount of ways for you to go
