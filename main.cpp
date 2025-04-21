@@ -112,15 +112,23 @@ int main()
             sf::Text text(font);
 
             //displaying the losing text
-            text.setString("GAME OVER");
+            text.setString("GAME");
             text.setCharacterSize(200);
             auto center = text.getGlobalBounds().size / 2.f;
             auto bounds = center + text.getLocalBounds().position;
             text.setOrigin(bounds);
-            text.setPosition(sf::Vector2f{ 400,400 });
+            text.setPosition(sf::Vector2f{ 400,300 });
             text.setFillColor(sf::Color(181, 18, 18));
 
             window.draw(text);
+
+            text.setString("OVER!!!");
+            center = text.getGlobalBounds().size / 2.f;
+            bounds = center + text.getLocalBounds().position;
+            text.setOrigin(bounds);
+            text.setPosition(sf::Vector2f{ 400,500 });
+            text.setFillColor(sf::Color(181, 18, 18));
+            window.draw(text);            
         }
         // change screen because game difficulty has been selected
         else
@@ -213,9 +221,25 @@ int main()
                 enemy.moveEnemy(main);
                 enemyMove = 0;
             }
+
             board.setMaze(window, font, main);
             main.setSprite(window, spider);
             enemy.setSprite(window, enemyTexture);
+
+            if (gameDiff == 3 && enemy.checkIfPlayer(main) == true && delay.getElapsedTime() > sf::seconds(0.25))
+            {
+                enemy.setDamage(enemy.getDamage() + 1);
+
+                enemy.setXPos(30);
+                enemy.setYPos(730);
+
+                delay.restart();
+            }
+
+            if (enemy.getDamage() == 3)
+            {
+                gameDiff = -1;
+            }
 
             gameDiff = board.checkWin(window, font, moveX, moveY, gameDiff);
         }
