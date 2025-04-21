@@ -22,17 +22,25 @@ int main()
 
 
     // Declaring variables /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     sf::RenderWindow window(sf::VideoMode({800, 800}), "Lets Play The Maze Game!");
+
+    // Player
     sf::Texture spider("spider.png", false, sf::IntRect({ 0,0 }, { 638,532 }));
-    sf::Font font("Game Bubble.ttf");
     Player main(20.f, Vector2f(30, 30), spider);
+
+    // Game Board
+    sf::Font font("Game Bubble.ttf");
     Maze board(Vector2f(0, 0), Vector2f(0, 0), sf::Color::Transparent);
 
+    // Enemy
     sf::Texture enemyTexture("enemy.png", false, sf::IntRect({ 0, 0 }, { 382,661 }));
-    Enemy enemy(20.f, Vector2f(30, 30), enemyTexture);
+    Enemy enemy(20.f, Vector2f(30, 730), enemyTexture);
 
-    int gameDiff = 0, moveX = 1, moveY = 1, moves = 0; //keep tally on number of moves so we can say they got the best score
+    // other
+    int gameDiff = 0, enemyMove = 0, moveX = 1, moveY = 1, moves = 0; //keep tally on number of moves so we can say they got the best score
     sf::Clock delay;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     // we want "enimies" that they can't always see and when they jump into the spot they lose
@@ -70,7 +78,7 @@ int main()
             //hard
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3)) // hard
             {
-                //board.hardMaze();
+                board.hardMaze();
                 gameDiff = 3;
             }
         }
@@ -128,7 +136,7 @@ int main()
                     if (board.checkSpot(main, moveX, moveY) == true)
                     {
                         main.setYPos(main.getYPos() + 100);
-                        main.rotateSprite(spider, "down");
+                        main.rotateSprite("down");
                     }
                     else
                     {
@@ -136,6 +144,8 @@ int main()
                     }
                     delay.restart();
                 }
+
+                enemyMove = 1;
             }
             // move up
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && delay.getElapsedTime() > sf::seconds(0.25))
@@ -147,7 +157,7 @@ int main()
                     if (board.checkSpot(main, moveX, moveY) == true)
                     {
                         main.setYPos(main.getYPos() - 100);
-                        main.rotateSprite(spider, "up");
+                        main.rotateSprite("up");
                     }
                     else
                     {
@@ -155,6 +165,7 @@ int main()
                     }
                     delay.restart();
                 }
+                enemyMove = 1;
             }
             // move left
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && delay.getElapsedTime() > sf::seconds(0.25))
@@ -166,7 +177,7 @@ int main()
                     if (board.checkSpot(main, moveX, moveY) == true)
                     {
                         main.setXPos(main.getXPos() - 100);
-                        main.rotateSprite(spider, "left");
+                        main.rotateSprite("left");
                     }
                     else
                     {
@@ -174,6 +185,7 @@ int main()
                     }
                     delay.restart();
                 }
+                enemyMove = 1;
             }
             // move right
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && delay.getElapsedTime() > sf::seconds(0.25))
@@ -185,7 +197,7 @@ int main()
                     if (board.checkSpot(main, moveX, moveY) == true)
                     {
                         main.setXPos(main.getXPos() + 100);
-                        main.rotateSprite(spider, "right");
+                        main.rotateSprite("right");
                     }
                     else
                     {
@@ -193,8 +205,14 @@ int main()
                     }
                     delay.restart();
                 }
+                enemyMove = 1;
             }
-
+           
+            if (gameDiff == 3 && enemyMove == 1)//hard level
+            {
+                enemy.moveEnemy(main);
+                enemyMove = 0;
+            }
             board.setMaze(window, font, main);
             main.setSprite(window, spider);
             enemy.setSprite(window, enemyTexture);
