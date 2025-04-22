@@ -12,6 +12,9 @@ You move the player by pressing the arrow keys.
 There is a slight delay for key presses so don't spam your key board.
 In the Hard level there is an enemy that will chace the player.
 Don't get caught 3 times or else it's game over.
+There are 3 difficulty levels, easy, medium, adn hard. In easy, you need to get to the end without worrying about enemy.
+In medium, for every 5 move that player makes, enemy gets closer to the end. So pleayer needs to get to the end before enemy to win the game. 
+In hard level, the enemy keeps getting closer to the player and if the enemy meet the player 3 times, then the game is over.
 
 Video Link: https://youtu.be/77O1H7ZnK-8
 
