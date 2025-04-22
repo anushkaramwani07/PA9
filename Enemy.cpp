@@ -24,7 +24,7 @@ void Enemy::rotateSprite(string direction)
 {
 	if (direction == "right")
 	{
-		mSprite.setScale(sf::Vector2f(-1, 1));
+		mSprite.scale(sf::Vector2f(-1.f, 1.f));
 	}
 	else if (direction == "left")
 	{
@@ -69,12 +69,12 @@ void Enemy::moveEnemy(Player p)
 	if (p.getXPos() > this->getXPos())
 	{
 		this->setXPos(this->getXPos() + 100);
-		this->rotateSprite("right");
+		//this->rotateSprite("right");
 	}
 	else if (p.getXPos() < this->getXPos())
 	{
 		this->setXPos(this->getXPos() - 100);
-		this->rotateSprite("left");
+		//this->rotateSprite("left");
 	}	
 	else if (p.getYPos() > this->getYPos())
 	{
