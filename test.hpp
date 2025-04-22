@@ -54,12 +54,25 @@ public:
 
 	/*************************************************************
 	* Function: testMazeConstructor()
-	* Date Created: 4/19/25
-	* Date Last Modified: 4/19/25
-	* Description: tests the constructor for the maze
+	* Date Created: 4/20/25
+	* Date Last Modified: 4/20/25
+	* Description: tests if the sprite rotates in the drirection we want
 	* Input parameters: none
 	* Returns: nothing
 	* Preconditions: none
 	* Postconditions: none
 	*************************************************************/
+	void testRotateSprite();
+
+	/*************************************************************
+	* Function: testCheckWin()
+	* Date Created: 4/21/25
+	* Date Last Modified: 4/21/25
+	* Description: tests the check win function for maze
+	* Input parameters: none
+	* Returns: nothing
+	* Preconditions: none
+	* Postconditions: none
+	*************************************************************/
+	void testCheckWin();
 };
