@@ -13,7 +13,7 @@ There is a slight delay for key presses so don't spam your key board.
 In the Hard level there is an enemy that will chace the player.
 Don't get caught 3 times or else it's game over.
 
-Video Link:
+Video Link: https://youtu.be/77O1H7ZnK-8
 
 Video "Script"
 We created a maze game where the player has to get to the end without being able to see the walls of the maze until they run into one.
