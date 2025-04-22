@@ -11,7 +11,7 @@
 #pragma once
 
 #include "Header.hpp"
-#include "Player.hpp"
+#include "Enemy.hpp"
 
 class Maze : public RectangleShape
 {
