@@ -18,7 +18,7 @@ int main()
     //t.testSetSprite();
     //t.testCheckSpot();
     //t.testRotateSprite();
-    t.testCheckWin();
+    //t.testCheckWin();
     //////////////////////////////////////////////////////////////////////
 
 
@@ -65,13 +65,18 @@ int main()
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1)) // easy
             {
                 board.easyMaze();
+                main.setXPos(30);
+                main.setYPos(30);
+                moveY = 1;
+                moveX = 1;
                 gameDiff = 1;
             }
             //medium
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2)) // medium
             {
                 board.mediumMaze();
-                main.setYPos(main.getYPos() + 300);
+                main.setYPos(330);
+                main.setXPos(30);
                 moveX = 1;
                 moveY = 4;
                 gameDiff = 2;
@@ -80,8 +85,8 @@ int main()
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3)) // hard
             {
                 board.hardMaze();
-                main.setXPos(main.getXPos() + 300);
-                main.setYPos(main.getYPos() + 400);
+                main.setXPos(330);
+                main.setYPos(430);
                 moveY = 5;
                 moveX = 4;
                 gameDiff = 3;
@@ -123,6 +128,8 @@ int main()
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
             {
                 gameDiff = 0;
+                board.clearBoard();
+                enemy.setDamage(0);
             }
         }
         // they lost the game
@@ -162,6 +169,8 @@ int main()
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
             {
                 gameDiff = 0;
+                board.clearBoard();
+                enemy.setDamage(0);
             }
 
         }
@@ -269,7 +278,7 @@ int main()
                 enemy.setDamage(enemy.getDamage() + 1);
 
                 enemy.setXPos(30);
-                enemy.setYPos(730);
+                enemy.setYPos(30);
 
                 delay.restart();
             }
