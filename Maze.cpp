@@ -99,20 +99,32 @@ void Maze::setMaze(sf::RenderWindow& window, sf::Font font, Player p)
                 text.setOrigin(position);
                 text.setFillColor(sf::Color(43, 227, 98));
                 window.draw(text);
-
-                window.draw(*this);
             }
         }
     }
 
     //displaying the end text on the screen
     text.setString("End");
-    text.setCharacterSize(25);
-    position.y = -770;
-    position.x = -750;
-    text.setOrigin(position);
-    text.setFillColor(sf::Color(245, 24, 80));
-    window.draw(text);
+
+    position.x = -50;
+    position.y = -70;
+
+    for (int i = 0; i < 8;i++)
+    {
+        for (int j = 0; j < 8;j++)
+        {
+            if (arrBoard[i][j] == 2)
+            {
+                position.x = position.x + j * -100; // x position
+                position.y = position.y + i * -100; // y postition
+
+                //displaying the start text on the screen                
+                text.setOrigin(position);
+                text.setFillColor(sf::Color(245, 24, 80));
+                window.draw(text);
+            }
+        }
+    }
 
     window.draw(p);
 }
@@ -181,7 +193,18 @@ void Maze::mediumMaze()
 *************************************************************/
 void Maze::hardMaze() // enimies
 {
+    this->arrBoard[4][3] = 3; //start
+    arrBoard[1][1] = arrBoard[2][1] = arrBoard[3][1] = arrBoard[4][1] = arrBoard[5][1] = arrBoard[6][1] = arrBoard[7][1] =
+        arrBoard[1][2] = arrBoard[4][2] = 
+        arrBoard[1][3] = arrBoard[2][3] = arrBoard[3][3] = arrBoard[5][3] = arrBoard[6][3] = arrBoard[7][3] =
+        arrBoard[1][4] = arrBoard[3][4] = arrBoard[5][4] = arrBoard[7][4] =
+        arrBoard[1][5] = arrBoard[3][5] = arrBoard[4][5] = arrBoard[5][5] = arrBoard[7][5] =
+        arrBoard[1][6] = arrBoard[2][6] = arrBoard[7][6] = 
+        arrBoard[4][7] = arrBoard[5][7] = arrBoard[6][7] = arrBoard[7][7] = 1; // paths
 
+    arrBoard[3][7] = 2; // end
+
+    mPaths = 31; // not includeing start and end
 }
 
 /*************************************************************
