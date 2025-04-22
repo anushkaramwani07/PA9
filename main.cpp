@@ -10,7 +10,7 @@
 
 #include "Test.hpp"
 
-int main()
+int main(void)
 {
     // test cases ////////////////////////////////////////////////////////
     Test t;
@@ -36,7 +36,7 @@ int main()
 
     // Enemy
     sf::Texture enemyTexture("enemy.png", false, sf::IntRect({ 0, 0 }, { 382,661 }));
-    Enemy enemy(20.f, Vector2f(30, 30), enemyTexture);
+    Enemy enemy(20.f, Vector2f(30, 730), enemyTexture);
 
     // other
     int gameDiff = 0, enemyMove = 0, moveX = 1, moveY = 1, moves = 0; //keep tally on number of moves so we can say they got the best score
@@ -130,6 +130,8 @@ int main()
                 gameDiff = 0;
                 board.clearBoard();
                 enemy.setDamage(0);
+                enemy.setXPos(30);
+                enemy.setYPos(730);
             }
         }
         // they lost the game
@@ -171,6 +173,8 @@ int main()
                 gameDiff = 0;
                 board.clearBoard();
                 enemy.setDamage(0);
+                enemy.setXPos(30);
+                enemy.setYPos(730);
             }
 
         }
@@ -266,23 +270,35 @@ int main()
                 enemyMove = 0;
             }
 
+            //
+            if (gameDiff == 2)
+            {
+                enemyMove = enemy.medium(enemyMove);
+            }
+
+
             board.setMaze(window, font, main);
             main.setSprite(window, spider);
 
-            if (gameDiff == 3)
+            if (gameDiff == 3 || gameDiff == 2)
             {
-                enemy.setSprite(window, enemyTexture);
+                enemy.setSprite(window, enemyTexture); // display the enemy
             }
             if (gameDiff == 3 && enemy.checkIfPlayer(main) == true && delay.getElapsedTime() > sf::seconds(0.25))
             {
                 enemy.setDamage(enemy.getDamage() + 1);
 
                 enemy.setXPos(30);
-                enemy.setYPos(30);
+                enemy.setYPos(730);
 
                 delay.restart();
             }
             if (enemy.getDamage() == 3)
+            {
+                gameDiff = -1;
+            }
+
+            if (enemy.checkEnd() == true)
             {
                 gameDiff = -1;
             }
