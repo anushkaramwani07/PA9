@@ -6,27 +6,17 @@ Anushka Ramwani, Lab Section: 10
 Discription:
 This is a game where the player must move through a invisable maze. 
 There are three difficulties (easy, medium, hard) that you must select with your number keys on the key board. 
+In easy, you need to get to the end without worrying about enemy.
 Your goal is to reach the end of the maze (clearly marked as end). 
 Once you have found the "walls" of the maze they then appear so you know not to go that way again.
 You move the player by pressing the arrow keys.
 There is a slight delay for key presses so don't spam your key board.
+In medium, for every 5 move that player makes, enemy gets closer to the end. 
+So pleayer needs to get to the end before enemy to win the game. 
 In the Hard level there is an enemy that will chace the player.
 Don't get caught 3 times or else it's game over.
-There are 3 difficulty levels, easy, medium, adn hard. In easy, you need to get to the end without worrying about enemy.
-In medium, for every 5 move that player makes, enemy gets closer to the end. So pleayer needs to get to the end before enemy to win the game. 
 In hard level, the enemy keeps getting closer to the player and if the enemy meet the player 3 times, then the game is over.
 
-Video Link: https://youtu.be/77O1H7ZnK-8
 
-Video "Script"
-We created a maze game where the player has to get to the end without being able to see the walls of the maze until they run into one.
-We created 3 different levels with varying difficulty.
-Easy is the player just trying to get through the maze.
-Medium is the player trying to escape before the skeleton does.
-Hard is the player trying to escape before the skeleton catches you three times.
-We used inheratence when creating the map and the players/enemys.
-When creating the maze we inherated from RechtangleShape so we were easily able to create our rectangular board along with some other features
-like adding text to see the start and finish.
-With the players we inherated from circleSpace because at first our players were going to be circles but now it just makes it easy to keep track of
-the players position.
-The enemies inherate from the players but they include things like damage and moving on their own.
+Video Link:
+https://youtu.be/77O1H7ZnK-8
