@@ -27,8 +27,6 @@ public:
 	*************************************************************/
 	Player(const float& rad, const Vector2f& pos, sf::Texture texture) : mSprite(texture), CircleShape(rad)
 	{
-		/*mColor = sf::Color::Transparent;
-		mSize = rad;*/
 		xPos = pos.x;
 		yPos = pos.y;
 		this->setFillColor(sf::Color::Transparent);
@@ -46,7 +44,7 @@ public:
 	* Preconditions: none
 	* Postconditions: none
 	*************************************************************/
-	void rotateSprite(sf::Texture texture, string direction);
+	virtual void rotateSprite(string direction);
 
 	//setters
 	/*************************************************************
@@ -107,9 +105,7 @@ public:
 	*************************************************************/
 	double getYPos();
 
-private:
-	/*sf::Color mColor;
-	float mSize;*/
+protected:
 	double xPos;
 	double yPos;
 	sf::Sprite mSprite;
