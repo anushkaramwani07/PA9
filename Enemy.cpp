@@ -24,11 +24,11 @@ void Enemy::rotateSprite(string direction)
 {
 	if (direction == "right")
 	{
-		mSprite.scale(sf::Vector2f(-1.f, 1.f));
+		mSprite.setRotation(sf::degrees(0));
 	}
 	else if (direction == "left")
 	{
-		mSprite.setRotation(sf::degrees(0));
+		mSprite.scale(sf::Vector2f(-1.f, 1.f));
 	}
 }
 
@@ -44,9 +44,9 @@ void Enemy::rotateSprite(string direction)
 *************************************************************/
 bool Enemy::checkIfPlayer(Player p)
 {
-	if (p.getXPos() == this->getXPos())
+	if (p.getXPos() == this->getXPos()) // are they at the same X
 	{
-		if (p.getYPos() == this->getYPos())
+		if (p.getYPos() == this->getYPos()) // are they also at the same Y
 		{
 			return true;
 		}
@@ -66,21 +66,19 @@ bool Enemy::checkIfPlayer(Player p)
 *************************************************************/
 void Enemy::moveEnemy(Player p)
 {
-	if (p.getXPos() > this->getXPos())
+	if (p.getXPos() > this->getXPos()) // is the player at a column to the right of the enemy
 	{
-		this->setXPos(this->getXPos() + 100);
-		//this->rotateSprite("right");
+		this->setXPos(this->getXPos() + 100); 
 	}
-	else if (p.getXPos() < this->getXPos())
+	else if (p.getXPos() < this->getXPos()) // is the player at a column to the left of the enemy
 	{
 		this->setXPos(this->getXPos() - 100);
-		//this->rotateSprite("left");
 	}	
-	else if (p.getYPos() > this->getYPos())
+	else if (p.getYPos() > this->getYPos()) // is the player at a lower row than the enemy??
 	{
 		this->setYPos(this->getYPos() + 100);
 	}
-	else if (p.getYPos() < this->getYPos())
+	else if (p.getYPos() < this->getYPos()) // is the player at a higher row than the enemy??
 	{
 		this->setYPos(this->getYPos() - 100);
 	}
@@ -115,21 +113,38 @@ int Enemy::getDamage()
 	return this->mDamage;
 }
 
-
-// as the player moves, the skeleton should keep getting closer towards the "end".
-//if skeleton gets there before player, player loses.
+/*************************************************************
+* Function: medium()
+* Date Created: 4/22/25
+* Date Last Modified: 4/22/25
+* Description: moves the enemy for the medium map
+* Input parameters: int move
+* Returns: move
+* Preconditions: none
+* Postconditions: none
+*************************************************************/
 int Enemy::medium(int move)
 {
-	//if skeletonX> playerX
-	//keep incrementing xPos.
-	if (move == 2)
+	// as the player moves, the skeleton should keep getting closer towards the "end".
+//if skeleton gets there before player, player loses.
+	if (move == 5)
 	{
 		this->setXPos(this->getXPos() + 100);
 		move = 0;
 	}
-		return move;
+	return move;
 }
 
+/*************************************************************
+* Function: checkEnd()
+* Date Created: 4/22/25
+* Date Last Modified: 4/22/25
+* Description: sees if the enemy is at the end
+* Input parameters: none
+* Returns: true or false
+* Preconditions: none
+* Postconditions: none
+*************************************************************/
 bool Enemy::checkEnd()
 {
 	if (this->getYPos() == 730 && this->getXPos() == 730)
