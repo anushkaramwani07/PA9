@@ -11,28 +11,6 @@
 #include "Enemy.hpp"
 
 /*************************************************************
-* Function: rotateSprite()
-* Date Created: 4/21/25
-* Date Last Modified: 4/21/25
-* Description: rotates the enemy
-* Input parameters: string direction
-* Returns: nothing
-* Preconditions: none
-* Postconditions: none
-*************************************************************/
-void Enemy::rotateSprite(string direction)
-{
-	if (direction == "right")
-	{
-		mSprite.setRotation(sf::degrees(0));
-	}
-	else if (direction == "left")
-	{
-		mSprite.scale(sf::Vector2f(-1.f, 1.f));
-	}
-}
-
-/*************************************************************
 * Function: checkIfPlayer()
 * Date Created: 4/21/25
 * Date Last Modified: 4/21/25
