@@ -116,6 +116,7 @@ int main(void)
 
             window.draw(text);
 
+            //seeing if the player wants to play again
             text.setString("Play Again??? (Press F)");
             text.setCharacterSize(50);
             center = text.getGlobalBounds().size / 2.f;
@@ -125,7 +126,7 @@ int main(void)
             text.setFillColor(sf::Color(129, 252, 234));
             window.draw(text);
 
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F)) // reseting everything if they do play again
             {
                 gameDiff = 0;
                 board.clearBoard();
@@ -158,7 +159,7 @@ int main(void)
             text.setFillColor(sf::Color(181, 18, 18));
             window.draw(text);   
 
-
+            //seeing if the player wants to play again
             text.setString("Try Again??? (Press F)");
             text.setCharacterSize(50);
             center = text.getGlobalBounds().size / 2.f;
@@ -168,7 +169,7 @@ int main(void)
             text.setFillColor(sf::Color(129, 252, 234));
             window.draw(text);
 
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F)) // reseting everything if they do play again
             {
                 gameDiff = 0;
                 board.clearBoard();
@@ -201,7 +202,7 @@ int main(void)
                     delay.restart();
                 }
 
-                enemyMove = 1;
+                ++enemyMove;
             }
             // move up
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && delay.getElapsedTime() > sf::seconds(0.25))
@@ -221,7 +222,8 @@ int main(void)
                     }
                     delay.restart();
                 }
-                enemyMove = 1;
+
+                ++enemyMove;
             }
             // move left
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && delay.getElapsedTime() > sf::seconds(0.25))
@@ -241,7 +243,8 @@ int main(void)
                     }
                     delay.restart();
                 }
-                enemyMove = 1;
+
+                ++enemyMove;
             }
             // move right
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && delay.getElapsedTime() > sf::seconds(0.25))
@@ -261,7 +264,8 @@ int main(void)
                     }
                     delay.restart();
                 }
-                enemyMove = 1;
+
+                ++enemyMove;
             }
            
             if (gameDiff == 3 && enemyMove == 1)//hard level
@@ -270,21 +274,20 @@ int main(void)
                 enemyMove = 0;
             }
 
-            //
             if (gameDiff == 2)
             {
                 enemyMove = enemy.medium(enemyMove);
             }
 
-
-            board.setMaze(window, font, main);
+            board.setMaze(window, font, main); // updating maze
             main.setSprite(window, spider);
 
-            if (gameDiff == 3 || gameDiff == 2)
+            if (gameDiff == 3 || gameDiff == 2) // displauing the enemy if it is a hard level
             {
                 enemy.setSprite(window, enemyTexture); // display the enemy
             }
-            if (gameDiff == 3 && enemy.checkIfPlayer(main) == true && delay.getElapsedTime() > sf::seconds(0.25))
+            if (gameDiff == 3 && enemy.checkIfPlayer(main) == true && delay.getElapsedTime() > sf::seconds(0.25)) // seeing if the enemy has caught up to the player
+                // given a delay so when the enemy catches up the player can see the enemy get them and then dissapear back to it's starting place
             {
                 enemy.setDamage(enemy.getDamage() + 1);
 
@@ -293,17 +296,17 @@ int main(void)
 
                 delay.restart();
             }
-            if (enemy.getDamage() == 3)
+            if (enemy.getDamage() == 3) // the player lost because the enemy got them 3 times
             {
                 gameDiff = -1;
             }
 
-            if (enemy.checkEnd() == true)
+            if (enemy.checkEnd() == true && gameDiff == 2)
             {
                 gameDiff = -1;
             }
 
-            gameDiff = board.checkWin(window, font, moveX, moveY, gameDiff);
+            gameDiff = board.checkWin(window, font, moveX, moveY, gameDiff); // seeing if the player has won
         }
 
         window.display();
