@@ -31,18 +31,6 @@ public:
 	};
 
 	/*************************************************************
-	* Function: rotateSprite()
-	* Date Created: 4/21/25
-	* Date Last Modified: 4/21/25
-	* Description: rotates the enemy
-	* Input parameters: string direction
-	* Returns: nothing
-	* Preconditions: none
-	* Postconditions: none
-	*************************************************************/
-	void rotateSprite(string direction) override;
-
-	/*************************************************************
 	* Function: checkIfPlayer()
 	* Date Created: 4/21/25
 	* Date Last Modified: 4/21/25
@@ -90,9 +78,28 @@ public:
 	*************************************************************/
 	int getDamage();
 
-
+	/*************************************************************
+	* Function: medium()
+	* Date Created: 4/22/25
+	* Date Last Modified: 4/22/25
+	* Description: moves the enemy for the medium map
+	* Input parameters: int move
+	* Returns: move
+	* Preconditions: none
+	* Postconditions: none
+	*************************************************************/
 	int medium(int move);
 
+	/*************************************************************
+	* Function: checkEnd()
+	* Date Created: 4/22/25
+	* Date Last Modified: 4/22/25
+	* Description: sees if the enemy is at the end
+	* Input parameters: none
+	* Returns: true or false
+	* Preconditions: none
+	* Postconditions: none
+	*************************************************************/
 	bool checkEnd();
 
 private:
