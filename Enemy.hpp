@@ -90,6 +90,11 @@ public:
 	*************************************************************/
 	int getDamage();
 
+
+	int medium(int move);
+
+	bool checkEnd();
+
 private:
 	int mDamage;
 };
