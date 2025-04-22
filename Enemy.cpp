@@ -114,3 +114,27 @@ int Enemy::getDamage()
 {
 	return this->mDamage;
 }
+
+
+// as the player moves, the skeleton should keep getting closer towards the "end".
+//if skeleton gets there before player, player loses.
+int Enemy::medium(int move)
+{
+	//if skeletonX> playerX
+	//keep incrementing xPos.
+	if (move == 2)
+	{
+		this->setXPos(this->getXPos() + 100);
+		move = 0;
+	}
+		return move;
+}
+
+bool Enemy::checkEnd()
+{
+	if (this->getYPos() == 730 && this->getXPos() == 730)
+	{
+		return true;
+	}
+	return false;
+}
