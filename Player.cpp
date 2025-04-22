@@ -10,7 +10,7 @@
 
 #include "Player.hpp"
 
- /*************************************************************
+/*************************************************************
 * Function: rotateSprite()
 * Date Created: 4/20/25
 * Date Last Modified: 4/20/25
@@ -20,7 +20,7 @@
 * Preconditions: none
 * Postconditions: none
 *************************************************************/
-void Player::rotateSprite(sf::Texture texture, string direction)
+void Player::rotateSprite(string direction)
 {
 	if (direction == "down")
 	{
@@ -92,7 +92,7 @@ void Player::setSprite(sf::RenderWindow& window, sf::Texture texture)
 	mSprite.setTexture(texture, false);
 	mSprite.setScale(Vector2f(0.125, 0.125));
 	mSprite.setOrigin(Vector2f(319, 266));
-	mSprite.setPosition(Vector2f(xPos + 15, yPos + 15));
+	mSprite.setPosition(Vector2f(xPos + 20, yPos + 20));
 	window.draw(mSprite);
 }
 
