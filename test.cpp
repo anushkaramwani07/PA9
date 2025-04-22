@@ -56,10 +56,10 @@ void Test::testSetSprite()
 {
     sf::RenderWindow window(sf::VideoMode({ 800, 800 }), "Lets Play The Maze Game!");
     sf::Texture texture("spider.png", false, sf::IntRect({ 0,0 }, { 638,532 }));
-    sf::Sprite spider(texture);
     Player p(40.f, Vector2f(400, 400), texture);
 
-    cout << "X Position: " << p.getXPos() << " Y Position: " << p.getYPos(); // we will see the postion the spider is set too
+    cout << "X Position: " << p.getXPos() << " Y Position: " << p.getYPos() << endl; // we will see the postion the spider is set too
+    cout << "Postion seet X: 400, Y: 400";
 
     while (window.isOpen())
     {
@@ -70,7 +70,7 @@ void Test::testSetSprite()
         }
 
         window.clear();
-        p.setSprite(window, texture); // this should now place the top left corner of the spider in the middle of the screen
+        p.setSprite(window, texture); // this should now place the spider in the middle of the screen
         window.display();
     }
 }
@@ -90,7 +90,6 @@ void Test::testCheckSpot()
 {
     sf::RenderWindow window(sf::VideoMode({ 800, 800 }), "Lets Play The Maze Game!");
     sf::Texture texture("spider.png", false, sf::IntRect({ 0,0 }, { 638,532 }));
-    sf::Sprite spider(texture);
     sf::Font font("Game Bubble.ttf");
     Player p(20.f, Vector2f(30, 30), texture);
     Maze m(Vector2f(0, 0), Vector2f(0, 0), sf::Color::Transparent);
@@ -149,4 +148,121 @@ void Test::testCheckSpot()
 
     m.printBoard(); // has the board changed?
     //does the postion [7][0] in the array now say -1
+}
+
+/*************************************************************
+* Function: testMazeConstructor()
+* Date Created: 4/20/25
+* Date Last Modified: 4/20/25
+* Description: tests if the sprite rotates in the drirection we want
+* Input parameters: none
+* Returns: nothing
+* Preconditions: none
+* Postconditions: none
+*************************************************************/
+void Test::testRotateSprite()
+{
+    sf::RenderWindow window(sf::VideoMode({ 800, 800 }), "Lets Play The Maze Game!");
+    sf::Texture texture("spider.png", false, sf::IntRect({ 0,0 }, { 638,532 }));
+    Player p(20.f, Vector2f(400, 400), texture);
+
+    while (window.isOpen())
+    {
+        while (const std::optional event = window.pollEvent())
+        {
+            if (event->is<sf::Event::Closed>())
+                window.close();
+        }
+
+        window.clear();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+        {
+            p.rotateSprite("down");
+            cout << "down" << endl;
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+        {
+            p.rotateSprite("up");
+            cout << "up" << endl;
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+        {
+            p.rotateSprite("left");
+            cout << "left" << endl;
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+        {
+            p.rotateSprite("right");
+            cout << "right" << endl;
+        }
+
+        p.setSprite(window, texture); // this should now place the spider in the middle of the screen and in the direction 
+        //the player just pushed the arrow keys
+        window.display();
+    }
+}
+
+/*************************************************************
+* Function: testCheckWin()
+* Date Created: 4/21/25
+* Date Last Modified: 4/21/25
+* Description: tests the check win function for maze
+* Input parameters: none
+* Returns: nothing
+* Preconditions: none
+* Postconditions: none
+*************************************************************/
+void Test::testCheckWin()
+{
+    sf::RenderWindow window(sf::VideoMode({ 800, 800 }), "Lets Play The Maze Game!");
+    Maze m(Vector2f(0, 0), Vector2f(0, 0), sf::Color::Transparent);
+    sf::Font font("Game Bubble.ttf");
+
+    sf::Texture texture("spider.png", false, sf::IntRect({ 0,0 }, { 638,532 }));
+    Player p(20.f, Vector2f(400, 400), texture);
+
+    m.easyMaze();
+
+    if (m.checkWin(window, font, 1, 1, 1) != 10) // at the start
+    {
+        cout << "Not win. Pass" << endl;
+
+        if (m.checkWin(window, font, 8, 8, 1) == 10) // end
+        {
+            cout << "Win. Pass" << endl;
+
+            if (m.checkWin(window, font, 1, 8, 1) != 10) // blocked (0)
+            {
+                cout << "Not win. Pass" << endl;
+
+                if (m.checkWin(window, font, 1, 8, 1) != 10) // blocked and marked (-1)
+                {
+                    cout << "Not win. Pass" << endl;
+
+                    if (m.checkWin(window, font, 1, 5, 1) != 10) // path (1)
+                    {
+                        cout << "Not win. Pass" << endl;
+                    }
+                    else {
+                        cout << "Win. Fail" << endl;
+                    }
+                }
+                else {
+                    cout << "Win. Fail" << endl;
+                }
+            }
+            else {
+                cout << "Win. Fail" << endl;
+            }
+        }
+        else {
+            cout << "Not win. Fail" << endl;
+        }
+    }
+    else {
+        cout << "Win. Fail" << endl;
+    }
 }
