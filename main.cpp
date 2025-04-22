@@ -18,6 +18,7 @@ int main()
     //t.testSetSprite();
     //t.testCheckSpot();
     //t.testRotateSprite();
+    t.testCheckWin();
     //////////////////////////////////////////////////////////////////////
 
 
@@ -35,7 +36,7 @@ int main()
 
     // Enemy
     sf::Texture enemyTexture("enemy.png", false, sf::IntRect({ 0, 0 }, { 382,661 }));
-    Enemy enemy(20.f, Vector2f(30, 730), enemyTexture);
+    Enemy enemy(20.f, Vector2f(30, 30), enemyTexture);
 
     // other
     int gameDiff = 0, enemyMove = 0, moveX = 1, moveY = 1, moves = 0; //keep tally on number of moves so we can say they got the best score
@@ -79,6 +80,10 @@ int main()
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3)) // hard
             {
                 board.hardMaze();
+                main.setXPos(main.getXPos() + 300);
+                main.setYPos(main.getYPos() + 400);
+                moveY = 5;
+                moveX = 4;
                 gameDiff = 3;
             }
         }
@@ -105,6 +110,20 @@ int main()
             text.setFillColor(sf::Color(242, 242, 145));
 
             window.draw(text);
+
+            text.setString("Play Again??? (Press F)");
+            text.setCharacterSize(50);
+            center = text.getGlobalBounds().size / 2.f;
+            bounds = center + text.getLocalBounds().position;
+            text.setOrigin(bounds);
+            text.setPosition(sf::Vector2f{ 400,700 });
+            text.setFillColor(sf::Color(129, 252, 234));
+            window.draw(text);
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
+            {
+                gameDiff = 0;
+            }
         }
         // they lost the game
         else if (gameDiff == -1)
@@ -128,7 +147,23 @@ int main()
             text.setOrigin(bounds);
             text.setPosition(sf::Vector2f{ 400,500 });
             text.setFillColor(sf::Color(181, 18, 18));
-            window.draw(text);            
+            window.draw(text);   
+
+
+            text.setString("Try Again??? (Press F)");
+            text.setCharacterSize(50);
+            center = text.getGlobalBounds().size / 2.f;
+            bounds = center + text.getLocalBounds().position;
+            text.setOrigin(bounds);
+            text.setPosition(sf::Vector2f{ 400,700 });
+            text.setFillColor(sf::Color(129, 252, 234));
+            window.draw(text);
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
+            {
+                gameDiff = 0;
+            }
+
         }
         // change screen because game difficulty has been selected
         else
@@ -224,8 +259,11 @@ int main()
 
             board.setMaze(window, font, main);
             main.setSprite(window, spider);
-            enemy.setSprite(window, enemyTexture);
 
+            if (gameDiff == 3)
+            {
+                enemy.setSprite(window, enemyTexture);
+            }
             if (gameDiff == 3 && enemy.checkIfPlayer(main) == true && delay.getElapsedTime() > sf::seconds(0.25))
             {
                 enemy.setDamage(enemy.getDamage() + 1);
@@ -235,7 +273,6 @@ int main()
 
                 delay.restart();
             }
-
             if (enemy.getDamage() == 3)
             {
                 gameDiff = -1;
