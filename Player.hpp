@@ -35,18 +35,6 @@ public:
 	}
 
 	/*************************************************************
-	* Function: ~Player()
-	* Date Created: 4/14/25
-	* Date Last Modified: 4/14/25
-	* Description: destructor for the Player
-	* Input parameters: none
-	* Returns: nothing
-	* Preconditions: none
-	* Postconditions: none
-	*************************************************************/
-	~Player() {};
-
-	/*************************************************************
 	* Function: rotateSprite()
 	* Date Created: 4/20/25
 	* Date Last Modified: 4/20/25
