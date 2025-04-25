@@ -43,18 +43,6 @@ public:
 	}
 
 	/*************************************************************
-	* Function: ~Maze()
-	* Date Created: 4/14/25
-	* Date Last Modified: 4/14/25
-	* Description: destructor for the Maze
-	* Input parameters: none
-	* Returns: nothing
-	* Preconditions: none
-	* Postconditions: none
-	*************************************************************/
-	~Maze() {};
-
-	/*************************************************************
 	* Function: setMaze()
 	* Date Created: 4/14/25
 	* Date Last Modified: 4/20/25
