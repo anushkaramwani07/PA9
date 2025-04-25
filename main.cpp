@@ -133,6 +133,7 @@ int main(void)
                 enemy.setDamage(0);
                 enemy.setXPos(30);
                 enemy.setYPos(730);
+                enemyMove = 0;
             }
         }
         // they lost the game
@@ -176,6 +177,7 @@ int main(void)
                 enemy.setDamage(0);
                 enemy.setXPos(30);
                 enemy.setYPos(730);
+                enemyMove = 0;
             }
 
         }
