@@ -35,7 +35,7 @@ public:
 	}
 
 	/*************************************************************
-	* Function: Player()
+	* Function: ~Player()
 	* Date Created: 4/14/25
 	* Date Last Modified: 4/14/25
 	* Description: destructor for the Player
