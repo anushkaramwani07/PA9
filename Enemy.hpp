@@ -31,6 +31,18 @@ public:
 	};
 
 	/*************************************************************
+	* Function: ~Enemy()
+	* Date Created: 4/20/25
+	* Date Last Modified: 4/20/25
+	* Description: destructor for the Enemy
+	* Input parameters: none
+	* Returns: nothing
+	* Preconditions: none
+	* Postconditions: none
+	*************************************************************/
+	~Enemy() {};
+
+	/*************************************************************
 	* Function: checkIfPlayer()
 	* Date Created: 4/21/25
 	* Date Last Modified: 4/21/25
